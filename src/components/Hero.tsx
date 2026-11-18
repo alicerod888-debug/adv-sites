@@ -1,6 +1,9 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { waLink } from "@/lib/site";
+// pathLength: tipagem do framer-motion 11 conflita com @types/react 19
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MPath: any = motion.path;
 const cols = [80, 190, 300, 500, 610, 720];
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -10,10 +13,10 @@ export default function Hero() {
     <section id="inicio" className="relative flex min-h-[100svh] items-center overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_30%,#2a2113_0%,#080808_60%)]" />
       <motion.svg style={{ y }} viewBox="0 0 800 600" className="absolute right-[-10%] top-0 h-full w-[85%] opacity-70 lg:right-0 lg:w-[62%]" fill="none" stroke="#C6A15B" strokeWidth="1" aria-hidden preserveAspectRatio="xMidYMid slice">
-        <motion.path d="M40 140h720L400 20z" {...d(0)} />
-        <motion.path d="M40 160h720M40 175h720" {...d(1)} />
-        {cols.map((x, i) => <motion.path key={x} d={`M${x - 22} 190h44M${x - 16} 190v330M${x} 190v330M${x + 16} 190v330M${x - 24} 520h48`} {...d(i + 2)} />)}
-        <motion.path d="M20 540h760M0 560h800M-20 580h840" {...d(8)} />
+        <MPath d="M40 140h720L400 20z" {...d(0)} />
+        <MPath d="M40 160h720M40 175h720" {...d(1)} />
+        {cols.map((x, i) => <MPath key={x} d={`M${x - 22} 190h44M${x - 16} 190v330M${x} 190v330M${x + 16} 190v330M${x - 24} 520h48`} {...d(i + 2)} />)}
+        <MPath d="M20 540h760M0 560h800M-20 580h840" {...d(8)} />
       </motion.svg>
       <motion.div aria-hidden className="pointer-events-none absolute -left-1/3 top-0 h-full w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-gold/10 to-transparent" animate={{ x: ["0%", "500%"] }} transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 3 }} />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/60" />
